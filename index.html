@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBmaWxsPSIjNWU2MGNlIj48cGF0aCBkPSJNMjU2IDUxMmMxNDEuNCAwIDI1Ni0xMTQuNiAyNTYtMjU2UzM5Ny40IDAgMjU2IDBTMCAyNTYgMCAyNTZzMTE0LjYgMjU2IDI1NiAyNTZ6TTIyMy40IDE4OGMwIDExLTkuMSAxOS45LTIwLjMgMTkuOWgtNDcuMnYyNS4yaDQ3LjJjMTEuMyAwIDIwLjMgOSAyMC4zIDE5LjlzLTkuMSAxOS45LTIwLjMgMTkuOWgtNDcuMnYyNS4yaDQ3LjJjMTEuMyAwIDIwLjMgOSAyMC4zIDE5LjlzLTkuMSAxOS45LTIwLjMgMTkuOUgxMzYuMmMtMTEuMyAwLTIwLjMtOS0yMC4zLTE5LjlWMTY4YzAtMTEgOS4xLTE5LjkgMjAuMy0xOS45aDY3LjFjMTEuMyAwIDIwLjMgOSAyMC4zIDE5Ljl6TTM0My43IDE0OC4xYzUuMSA4LjkgMi4yIDIwLjItNi43IDI1LjNsLTUwLjcgMjkuM2w1MC43IDI5LjNjOC45IDUuMSAxMS44IDE2LjUgNi43IDI1LjNzLTE2LjUgMTEuOC0yNS4zIDYuN2wtNTAuNy0yOS4zbC01MC43IDI5LjNjLTguOSA1LjEtMjAuMiAyLjItMjUuMy02LjdzLTIuMi0yMC4yIDYuNy0yNS4zbDUwLjctMjkuM2wtNTAuNy0yOS4zYy04LjktNS4xLTExLjgtMTYuNS02LjctMjUuM3MxNi41LTExLjggMjUuMy02LjdsNTAuNyAyOS4zbDUwLjctMjkuM2M4LjktNS4xIDIwLjItMi4yIDI1LjMgNi43eiIvPjwvc3ZnPg==">
+</head>
+<body>
+    <div class="container">
+        <div class="card-container">
+            <div class="card glass-effect">
+                <div class="card-header">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h1>Currency Converter</h1>
+                    </div>
+                    <p class="tagline">Fast, reliable currency conversion</p>
+                </div>
+                
+                <div class="card-body">
+                    <div class="result" id="result">
+                        <div class="loading-message hide">
+                            <div class="loader"></div>
+                            <p>Fetching latest exchange rates...</p>
+                        </div>
+                        
+                        <p class="error-message hide"><i class="fas fa-exclamation-triangle"></i> Error fetching exchange rates. Please try again later.</p>
+                        
+                        <div class="result-container hide">
+                            <div class="result-header">
+                                <h3>Conversion Result</h3>
+                                <span class="result-badge">Live Rate</span>
+                            </div>
+                            
+                            <div class="result-value">
+                                <p id="conversion-result"></p>
+                            </div>
+                            
+                            <div class="result-details">
+                                <p id="conversion-rate"></p>
+                                <p id="last-updated"><i class="far fa-clock"></i> Updating...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="amount">Amount</label>
+                        <div class="amount-input-container">
+                            <span class="currency-symbol">₹</span>
+                            <input type="number" id="amount" value="100" min="0.01" step="0.01" placeholder="Enter amount">
+                        </div>
+                    </div>
+                    
+                    <div class="currency-selection">
+                        <div class="currency-box from-currency">
+                            <label for="from-currency">From</label>
+                            <div class="select-container">
+                                <select id="from-currency" class="currency-select"></select>
+                                <div class="flag-container">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="swap-button-container">
+                            <button id="swap" class="swap-button" title="Swap currencies">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="currency-box to-currency">
+                            <label for="to-currency">To</label>
+                            <div class="select-container">
+                                <select id="to-currency" class="currency-select"></select>
+                                <div class="flag-container">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="convert-btn" class="convert-button">
+                        <span class="button-icon"><i class="fas fa-sync-alt"></i></span>
+                        <span class="button-text">Convert Now</span>
+                    </button>
+                    
+                    <div id="message-container"></div>
+                </div>
+                
+                <div class="card-footer">
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>Real-time</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-globe"></i>
+                            <span>150+ Currencies</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Secure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
